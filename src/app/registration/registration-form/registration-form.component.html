@@ -3,7 +3,7 @@
 <form [formGroup]="registrationForm" (ngSubmit)="save()">
   <label>
     Name:
-    <input type="text" formControlName="name" required>
+    <input type="text" formControlName="name">
   </label>
 
   <label>
@@ -26,8 +26,20 @@
     <input type="text" formControlName="phoneNumber">
   </label>
 
-  <button type="submit" [disabled]="!registrationForm.valid">Submit</button>
+
+    <button type="submit" [disabled]="!registrationForm.valid">
+      submit</button>
 
 </form>
+
+<div *ngIf="showSuccessMsg">
+  <div>
+    <p>
+      <strong>Registration Success!</strong> Please click here to login!.
+    </p>
+  </div>
+</div>
+
+
 
 
