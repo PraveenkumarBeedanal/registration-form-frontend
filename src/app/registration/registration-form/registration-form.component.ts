@@ -2,6 +2,8 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {Registration} from './registration';
 import {RegistrationService} from './registration.service';
+import {Router} from '@angular/router';
+
 
 
 @Component({
@@ -19,17 +21,21 @@ export class RegistrationFormComponent {
     phoneNumber: [null]
   });
 
+  showSuccessMsg = false;
   public registration = new Registration();
   public meetUpName = 'CI/CD';
 
   constructor(private fb: FormBuilder,
-              private registrationService: RegistrationService) { }
+              private registrationService: RegistrationService,
+              private route: Router ) { }
 
   save() {
     this.fillRegistrationDetails();
     this.registrationService.createRegistration(this.registration)
       .subscribe(registration => {
         this.registration = registration;
+        this.showSuccessMsg = true;
+        this.registrationForm.reset();
       });
   }
 
