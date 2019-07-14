@@ -1,8 +1,8 @@
-##Application requirements
+## Application requirements
 - [node.js](#https://nodejs.org/en/)
 - Angular CLI using command `npm install -g @angular/cli`
 
-## # Technologies Used
+## Technologies Used
 
 - Typescript
 - Angular 8
