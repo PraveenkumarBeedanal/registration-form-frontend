@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import {Registration} from './registration';
+import {RegistrationService} from './registration.service';
 
 
 @Component({
@@ -7,7 +9,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.css']
 })
-export class RegistrationFormComponent implements OnInit {
+export class RegistrationFormComponent {
 
   registrationForm = this.fb.group({
     name: [null, Validators.required],
@@ -17,14 +19,25 @@ export class RegistrationFormComponent implements OnInit {
     phoneNumber: [null]
   });
 
+  public registration = new Registration();
   public meetUpName = 'CI/CD';
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private registrationService: RegistrationService) { }
 
-  ngOnInit() {
+  save() {
+    this.fillRegistrationDetails();
+    this.registrationService.createRegistration(this.registration)
+      .subscribe(registration => {
+        this.registration = registration;
+      });
   }
 
-  onSubmit() {
-    console.log(this.registrationForm.value);
+  private fillRegistrationDetails() {
+    this.registration.name = this.registrationForm.get('name').value;
+    this.registration.password = this.registrationForm.get('password').value;
+    this.registration.address = this.registrationForm.get('address').value;
+    this.registration.email = this.registrationForm.get('email').value;
+    this.registration.phoneNumber = this.registrationForm.get('phoneNumber').value;
   }
 }

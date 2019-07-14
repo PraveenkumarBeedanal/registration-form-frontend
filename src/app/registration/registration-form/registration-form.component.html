@@ -1,6 +1,6 @@
 <h1>Welcome to {{meetUpName}} Meet-up registration</h1>
 
-<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="registrationForm" (ngSubmit)="save()">
   <label>
     Name:
     <input type="text" formControlName="name" required>
